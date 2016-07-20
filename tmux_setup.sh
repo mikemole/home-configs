@@ -12,8 +12,9 @@ then
   tmux new-session -s ${SESSION_NAME} -n Export -d
   # Create the other windows
   tmux new-window -n Runway -t ${SESSION_NAME}
+  tmux new-window -n CDC -t ${SESSION_NAME}
   tmux new-window -n Notes -t ${SESSION_NAME}
-  tmux new-window -n Redis -t ${SESSION_NAME}
+  tmux new-window -n Distro Data -t ${SESSION_NAME}
 
   # First window (1)
   tmux send-keys -t ${SESSION_NAME}:1 'cd ~/views/raw_data_export_via_jenkins' C-m
@@ -27,10 +28,21 @@ then
   tmux split-window -h -t ${SESSION_NAME}:2
   tmux split-window -v -t ${SESSION_NAME}:2.2
 
-  # Window 3 (Notes)
-  tmux send-keys -t ${SESSION_NAME}:3 'cs' C-m
+  # Window 3 (CDC)
+  tmux send-keys -t ${SESSION_NAME}:3 'cd ~/views/cdc' C-m
+  tmux split-window -h -t ${SESSION_NAME}:3
+  tmux split-window -v -t ${SESSION_NAME}:3.2
 
-  # Window 4 (Redis)
-  tmux send-keys -t ${SESSION_NAME}:4 'start-redis' C-m
+  # Window 4 (Notes)
+  tmux send-keys -t ${SESSION_NAME}:4 'cs' C-m
+
+  # Window 5 (Redis, mysql)
+  tmux split-window -h -t ${SESSION_NAME}:5
+  tmux send-keys -t ${SESSION_NAME}:5 'mysql.server start' C-m
+  tmux send-keys -t ${SESSION_NAME}:5.2 'start-redis' C-m
+
+  # Window 6 (Distro Data)
+  tmux send-keys -t ${SESSION_NAME}:6 'cd ~/views/distribution_data_backup' C-m
+
 fi
 tmux attach -t ${SESSION_NAME}
