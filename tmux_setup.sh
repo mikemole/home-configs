@@ -8,13 +8,14 @@ tmux has-session -t ${SESSION_NAME} 2>/dev/null
 
 if [ $? != 0 ]
 then
-  # Create the session with window "Export"
+  # Create session
   tmux new-session -s ${SESSION_NAME} -n Export -d
-  # Create the other windows
+  # Create additional windows
   tmux new-window -n Runway -t ${SESSION_NAME}
   tmux new-window -n CDC -t ${SESSION_NAME}
   tmux new-window -n Notes -t ${SESSION_NAME}
-  tmux new-window -n Distro Data -t ${SESSION_NAME}
+  tmux new-window -n Datastores -t ${SESSION_NAME}
+  tmux new-window -n "Distro Data" -t ${SESSION_NAME}
 
   # First window (1)
   tmux send-keys -t ${SESSION_NAME}:1 'cd ~/views/raw_data_export_via_jenkins' C-m
