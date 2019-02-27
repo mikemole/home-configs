@@ -16,6 +16,8 @@ then
   tmux new-window -n Notes -t ${SESSION_NAME}
   tmux new-window -n Datastores -t ${SESSION_NAME}
   tmux new-window -n "Distro Data" -t ${SESSION_NAME}
+  tmux new-window -n "lookout-dw" -t ${SESSION_NAME}
+  tmux new-window -n "dw-etl" -t ${SESSION_NAME}
 
   # First window (1)
   tmux send-keys -t ${SESSION_NAME}:1 'cd ~/views/raw_data_export_via_jenkins' C-m
@@ -44,6 +46,12 @@ then
 
   # Window 6 (Distro Data)
   tmux send-keys -t ${SESSION_NAME}:6 'cd ~/views/distribution_data_backup' C-m
+
+  # Window 7 (lookout-dw)
+  tmux send-keys -t ${SESSION_NAME}:7 'cd ~/views/lookout-dw' C-m
+
+  # Window 8 (dw-etl)
+  tmux send-keys -t ${SESSION_NAME}:8 'cd ~/views/dw-etl' C-m
 
 fi
 tmux attach -t ${SESSION_NAME}
